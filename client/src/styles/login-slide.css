@@ -1,0 +1,8 @@
+@keyframes slideIn {
+    from {
+      left: -150px; 
+    }
+    to {
+      left: calc(50% - 75px); 
+    }
+  }

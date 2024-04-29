@@ -39,6 +39,14 @@ export default function BasicMenu() {
         >
           История моих заказов
         </Link>
+      </MenuItem>,
+      <MenuItem key="myquestion" onClick={handleClose}>
+        <Link
+          to="/myquestion"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          История моих вопросов
+        </Link>
       </MenuItem>
     );
   } else if (authContext.role === "admin") {
@@ -57,6 +65,14 @@ export default function BasicMenu() {
           style={{ textDecoration: "none", color: "inherit" }}
         >
           Вопросы
+        </Link>
+      </MenuItem>,
+      <MenuItem key="viewusers" onClick={handleClose}>
+        <Link
+          to="/allusers"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          Пользователи
         </Link>
       </MenuItem>
     );

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { useAuthContext } from "../context/AuthContext";
 import { TableCell, TableRow } from "@mui/material";
+import { useAuthContext } from "../context/AuthContext";
 
-const HistoreOrderUser = () => {
+const QuestionHistoryUser = () => {
   const authContext = useAuthContext();
-  const [orders, setOrders] = useState([]);
-  // Функция для форматирования даты
+  const [questions, setQuestions] = useState([]);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -16,55 +15,52 @@ const HistoreOrderUser = () => {
     };
     return date.toLocaleDateString("ru-RU", options);
   };
-
   useEffect(() => {
-    const fetchUserOrders = async () => {
+    const fetchUserQuestion = async () => {
       try {
-        const response = await Axios.get("http://localhost:3307/orders", {
+        const response = await Axios.get("http://localhost:3307/question", {
           headers: {
             Authorization: `Bearer ${authContext.user.user_id}`, // Передаем user_id в заголовке запроса
           },
         });
-        setOrders(response.data);
+        setQuestions(response.data);
       } catch (error) {
         console.error("Error fetching user orders:", error);
       }
     };
 
-    fetchUserOrders();
+    fetchUserQuestion();
   }, [authContext.user.user_id]);
 
   return (
     <div>
-      <h2>История моих заказов</h2>
-      {orders.length > 0 ? (
+      <h2>История моих вопросов</h2>
+      {questions.length > 0 ? (
         <table>
           <thead>
             <tr>
-              <TableCell>Номер заказа</TableCell>
-              <TableCell>Авто</TableCell>
-              <TableCell>Дата заказа</TableCell>
-              <TableCell>Способ оплаты</TableCell>
+              <TableCell>Номер вопроса</TableCell>
+              <TableCell>Вопрос</TableCell>
+              <TableCell>Дата</TableCell>
               <TableCell>Статус</TableCell>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
+            {questions.map((questions, index) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{order.carName}</TableCell>
-                <TableCell>{formatDate(order.rentData)}</TableCell>
-                <TableCell>{order.selectedPayment}</TableCell>
-                <TableCell>{order.status}</TableCell>
+                <TableCell>{questions.question}</TableCell>
+                <TableCell>{formatDate(questions.messageData)}</TableCell>
+                <TableCell>{questions.status}</TableCell>
               </TableRow>
             ))}
           </tbody>
         </table>
       ) : (
-        <p>У вас пока нет заказов</p>
+        <p>У вас пока нет вопросов</p>
       )}
     </div>
   );
 };
 
-export default HistoreOrderUser;
+export default QuestionHistoryUser;

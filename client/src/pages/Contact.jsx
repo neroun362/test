@@ -12,16 +12,16 @@ import { useAuthContext } from "../context/AuthContext";
 
 const socialLinks = [
   {
-    url: "#",
+    url: "https://www.facebook.com/login/",
     icon: "ri-facebook-line",
   },
   {
-    url: "#",
+    url: "https://www.instagram.com/",
     icon: "ri-instagram-line",
   },
 
   {
-    url: "#",
+    url: "https://twitter.com/",
     icon: "ri-twitter-line",
   },
 ];

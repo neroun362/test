@@ -2,8 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../../styles/payment-method.css";
 import all from "../../assets/all-images/all.png";
 
-const PaymentMethod = ({ onPaymentChange }) => {
+const PaymentMethod = ({ onPaymentChange, formSubmitted }) => {
   const [selectedPayment, setSelectedPayment] = useState("");
+
+  useEffect(() => {
+    // Сброс выбора радиокнопок при успешной отправке формы
+    if (formSubmitted) {
+      setSelectedPayment("");
+    }
+  }, [formSubmitted]);
 
   const handlePaymentChange = (paymentMethod) => {
     setSelectedPayment(paymentMethod);

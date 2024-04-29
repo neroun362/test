@@ -147,7 +147,6 @@ const CarDetails = () => {
   }, [slug]);
 
   const car = carDetails.find((item) => item.carName === slug);
-  console.log(car);
 
   if (!car) {
     return <div>Loading...</div>;

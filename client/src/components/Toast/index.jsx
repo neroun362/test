@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 
 export const Toast = (description) => {
-  console.log("123");
   return (
     <div
       style={{

@@ -1,6 +1,10 @@
 .single__member {
   border: 1px solid #7c8a972d;
-  border-radius: 4px;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width:fit-content;
 }
 
 .single__member-social {
@@ -41,6 +45,10 @@
 .single__member-img {
   position: relative;
   cursor: pointer;
+  width: 280px; 
+  height: 200px; 
+  text-align: center;
+  
 }
 
 .single__member-img img {
@@ -51,3 +59,4 @@
   top: 0;
   opacity: 1;
 }
+

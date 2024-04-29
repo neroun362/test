@@ -68,17 +68,21 @@
 
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Navigate, Redirect, useNavigate } from "react-router-dom";
 
 import img from "../assets/all-images/drive.jpg";
 import Axios from "axios";
 import { toastMessage } from "../utils/toastMessage";
+import { useAuthContext } from "../context/AuthContext";
 const RegisterPage = ({ onLogin, onRegister }) => {
   const [firstNameUserReg, setFirstNameUserReg] = useState("");
   const [lastNameUserReg, setLastNameUserReg] = useState("");
   const [phoneUserReg, setPhoneUserReg] = useState("");
   const [emailUserReg, setEmailUserReg] = useState("");
   const [passwordUserReg, setPasswordUserReg] = useState("");
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const authContext = useAuthContext();
+  const navigate = useNavigate();
 
   const register = () => {
     if (
@@ -89,7 +93,7 @@ const RegisterPage = ({ onLogin, onRegister }) => {
       !passwordUserReg
     ) {
       // Проверка на пустые значения
-      //toastMessage("Пожалуйста, заполните все поля формы.");
+      toastMessage("Пожалуйста, заполните все поля формы.");
       return;
     }
     Axios.post("http://localhost:3307/registration", {
@@ -99,12 +103,14 @@ const RegisterPage = ({ onLogin, onRegister }) => {
       email: emailUserReg,
       password: passwordUserReg,
     }).then((response) => {
+      const user = response.data;
       console.log(response);
+      authContext.authUserChangeHandler(user);
     });
-
-    onRegister();
-    //toastMessage("Вы успешно зарегистрировались!");
+    navigate("/home");
+    toastMessage("Добро  пожаловать к нам! Спасибо что выбрали Нас!");
   };
+
   return (
     <div
       style={{
@@ -186,6 +192,7 @@ const RegisterPage = ({ onLogin, onRegister }) => {
                 type="password"
                 required
               />
+
               <Button
                 onClick={register}
                 type="submit"
@@ -195,6 +202,7 @@ const RegisterPage = ({ onLogin, onRegister }) => {
               >
                 Зарегистрироваться
               </Button>
+
               <Typography variant="body2" align="center" sx={{ mt: 2 }}>
                 Уже есть аккаунт?{" "}
                 <Link to="/login">

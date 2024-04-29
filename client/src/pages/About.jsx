@@ -62,7 +62,7 @@ const About = () => {
         </Container>
       </section>
 
-      <BecomeDriverSection />
+      {/* <BecomeDriverSection /> */}
 
       <section>
         <Container>
@@ -70,7 +70,19 @@ const About = () => {
             <Col lg="12" className="mb-5 text-center">
               <h6 className="section__subtitle">Наши сотрудники</h6>
             </Col>
-            <OurMembers />
+            <div
+              classname="employee"
+              style={{
+                display: "grid",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "30px",
+                margin: "0 auto",
+                gridTemplateColumns: "1fr 1fr 1fr",
+              }}
+            >
+              <OurMembers />
+            </div>
           </Row>
         </Container>
       </section>

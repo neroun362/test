@@ -14,6 +14,7 @@ const BookingForm = ({ car_id }) => {
     comments: "",
     selectedPayment: "",
   });
+  const [formSubmitted, setFormSubmitted] = useState(false); // Состояние для отслеживания отправки формы
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,6 +51,7 @@ const BookingForm = ({ car_id }) => {
         comments: "",
         selectedPayment: "",
       });
+      setFormSubmitted(true); // Устанавливаем значение formSubmitted в true после успешной отправки формы
     } catch (error) {
       console.error("Ошибка", error);
     }
@@ -61,6 +63,11 @@ const BookingForm = ({ car_id }) => {
       ...prevRentInformation,
       selectedPayment: paymentMethod,
     }));
+  };
+
+  // Обработчик события для сброса состояния выбора радиокнопок
+  const handleFormReset = () => {
+    setFormSubmitted(false);
   };
 
   return (
@@ -103,7 +110,7 @@ const BookingForm = ({ car_id }) => {
             </FormGroup>
 
             <div className="payment text-end mt-5">
-              <button>Арендовать</button>
+              <button onClick={handleFormReset}>Арендовать</button>
             </div>
             <div>
               <Link to="/contact" className="d-flex align-items-center gap-2">
@@ -118,7 +125,10 @@ const BookingForm = ({ car_id }) => {
         <div className="payment__info mt-5">
           <h5 className="mb-3 fw-bold">Способ оплаты</h5>
           {/* Передаем функцию обратного вызова в компонент PaymentMethod */}
-          <PaymentMethod onPaymentChange={handlePaymentChange} />
+          <PaymentMethod
+            onPaymentChange={handlePaymentChange}
+            formSubmitted={formSubmitted} // Передаем состояние formSubmitted в компонент PaymentMethod
+          />
         </div>
       </Col>
     </Row>

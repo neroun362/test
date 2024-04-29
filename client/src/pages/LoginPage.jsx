@@ -18,19 +18,18 @@ const LoginPage = ({ onRegister }) => {
       password: passwordUser,
     }).then((response) => {
       if (response.data.message) {
-        //setLoginStatus(response.data.message);
-        toastMessage("Некорректные данныe", "error");
+        toastMessage("Некорректные данные", "error");
         return;
       } else {
         const user = response.data;
-        console.log(user);
-        toastMessage("Вы успешно вошли в аккаунт!");
-        //localStorage.setItem("isLoggedIn", "true");
-        authContext.authUserChangeHandler(user);
+        if (user.deleteStatus === "Удален") {
+          toastMessage("Ошибка доступа.", "error");
+        } else {
+          toastMessage("Вы успешно вошли в аккаунт!");
+          authContext.authUserChangeHandler(user);
+        }
       }
     });
-
-    //toastMessage("Вы успешно зарегистрировались!");
   };
 
   return (
@@ -114,6 +113,21 @@ const LoginPage = ({ onRegister }) => {
             <></>
           </form>
         </Grid>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          bottom: "1px",
+          textAlign: "center",
+          alignItems: "center",
+          fontFamily: "Arial, sans-serif",
+          color: "white",
+          columnGap: "1rem", // Используем columnGap вместо column-gap
+          fontSize: "0.9rem", // Убираем точку с запятой и лишнюю точку с запятой здесь
+        }}
+      >
+        <h4>Нужна помощь? +375(29)1112233</h4>
       </div>
     </div>
   );

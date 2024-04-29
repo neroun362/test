@@ -38,7 +38,7 @@ const Home = () => {
       {/* =========== car offer section ============= */}
       <section></section>
       {/* =========== become a driver section ============ */}
-      <BecomeDriverSection />
+      {/* <BecomeDriverSection /> */}
 
       {/* =========== testimonial section =========== */}
       {/* <section>

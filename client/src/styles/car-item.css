@@ -6,16 +6,16 @@
   flex-direction: column;
 }
 .car__img-wrapper {
-  width: 375px; 
-  height: 250px; 
-
+  width: 100%; 
+  height: 250px; /* Задаем фиксированную высоту */
+  overflow: hidden; /* Скрываем избыточные части изображения */
 }
+
 .car__img {
-  /* position:absolute;
-  padding-bottom: 50%; */
-  
+  width: 100%;
+  height: 100%; /* Изображение заполняет всю высоту родительского контейнера */
+  object-fit: contain; /* Изображение заполняет контейнер, сохраняя при этом соотношение сторон */
 }
-
 
 .car__item-info span i {
   color: #f9a826;
@@ -56,7 +56,31 @@
   font-size: 1.2rem;
   font-weight: 600;
 }
+@media only screen and (max-width: 768px) {
+  .car__img-wrapper {
+    width: 100%; 
+    height: auto;
+  }
 
+  .car__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .car__img-wrapper {
+    width: 100%; 
+    height: auto;
+  }
+
+  .car__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
 @media only screen and (max-width: 992px) {
   .car__item h4 {
     font-size: 1.1rem;

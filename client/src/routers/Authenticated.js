@@ -12,7 +12,7 @@ import ProfilePage from "../pages/ProfilePageUser";
 import HistoryOrderUser from "../pages/HistoreOrderUser";
 import Layout from "../components/Layout/Layout";
 import AllHistoryOrder from "../pages/AllHistoryOrder";
-import QuestionUsers from "../pages/QuestionUsers";
+import AllUsersQuestion from "../pages/AllUsersQuestion"
 import HistoryQuestionUser from "../pages/HistoreQuestionUser";
 import AllUsers from "../pages/AllUsers";
 import { useAuthContext } from "../context/AuthContext";
@@ -44,7 +44,7 @@ const Authenticated = () => {
         {isAdmin && (
           <>
             <Route path="/allorder" element={<AllHistoryOrder />} />
-            <Route path="/allquestion" element={<QuestionUsers />} />
+            <Route path="/allquestion" element={<AllUsersQuestion />} />
             <Route path="/allusers" element={<AllUsers />} />
            
             

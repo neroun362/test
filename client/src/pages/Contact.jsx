@@ -79,49 +79,10 @@ const Contact = () => {
             <Col lg="7" md="7">
               <h6 className="fw-bold mb-4">Свяжитесь с нами</h6>
 
-              {/* <Form>
-                <FormGroup className="contact__form">
-                  <Input placeholder="Ваше имя" type="text" />
-                </FormGroup>
-                <FormGroup className="contact__form">
-                  <Input placeholder="Email" type="email" />
-                </FormGroup>
-                <FormGroup className="contact__form">
-                  <textarea
-                    rows="5"
-                    placeholder="Задайте свой вопрос"
-                    className="textarea"
-                  ></textarea>
-                </FormGroup>
-
-                <button className=" contact__btn" type="submit">
-                  Отправить сообщение
-                </button>
-              </Form> */}
               <form
                 onSubmit={sendMessage}
                 style={{ display: "flex", flexDirection: "column" }}
               >
-                {/* <TextField
-                  name="name"
-                  label="Имя"
-                  size="medium"
-                  type="phone"
-                  value={userContact.name}
-                  onChange={handleUserContactChange}
-                  required
-                  sx={{ marginBottom: "10px" }}
-                />
-                <TextField
-                  name="email"
-                  label="Почта"
-                  size="medium"
-                  type="email"
-                  value={userContact.email}
-                  required
-                  onChange={handleUserContactChange}
-                  sx={{ marginTop: "10px", marginBottom: "20px" }}
-                /> */}
                 <TextField
                   name="question"
                   label="Ваш вопрос"

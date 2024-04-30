@@ -14,8 +14,6 @@ const db = mysql.createConnection({
     database: "carrent",
   });
 
-  
-
   app.post("/registration", (req, res) => {
     const { firstName, lastName, phone, email, password, role, deleteStatus } = req.body;
 
@@ -44,6 +42,7 @@ const db = mysql.createConnection({
         }
     );
 });
+
 app.post("/login", (req, res) => {
   const phone = req.body.phone;
   const password = req.body.password;
@@ -69,8 +68,6 @@ app.post("/login", (req, res) => {
       }
   );
 });
-
-
 
 app.get("/cars", (req, res) => {
     db.query("SELECT * FROM cars", (err, result) => {
@@ -114,7 +111,6 @@ app.get("/cars", (req, res) => {
     );
   });
 
-
   app.get("/ordersByDate", (req, res) => {
     const { selectedDate } = req.query; // Получаем выбранную дату из запроса
   
@@ -135,6 +131,7 @@ app.get("/cars", (req, res) => {
       }
     );
   });
+
   app.get("/questionsByDate", (req, res) => {
     const { selectedDate } = req.query; // Получаем выбранную дату из запроса
   
@@ -155,8 +152,6 @@ app.get("/cars", (req, res) => {
     );
   });
   
-
-  
   app.get("/question", (req, res) => {
     const user_id = req.headers.authorization.split(' ')[1];// Получаем user_id из авторизации
     db.query(
@@ -173,6 +168,7 @@ app.get("/cars", (req, res) => {
       }
     );
   });
+
   app.put("/profile", (req, res) => {
     const user_id = req.headers.authorization.split(' ')[1]; // Извлечение user_id из заголовка Authorization
     const { firstName, lastName, email, phone, password } = req.body; // Получение обновленных данных из тела запроса
@@ -192,9 +188,6 @@ app.get("/cars", (req, res) => {
     );
   });
   
-
-
-
   app.get("/deletedUsers", (req, res) => {
     db.query(
       "SELECT * FROM users WHERE deleteStatus = 'Удален'",
@@ -209,6 +202,7 @@ app.get("/cars", (req, res) => {
       }
     );
   });
+
   app.put("/restoreUser", (req, res) => {
     const userId = req.query.id;
   
@@ -239,12 +233,6 @@ app.put("/deleteUser", (req, res) => {
       return res.status(200).send("Пользователь успешно помечен как удаленный");
   });
 });
-
-
-
-
-
-
 
   app.get("/allorders", (req, res) => {
     db.query(
@@ -361,15 +349,6 @@ app.put("/messages/:id/status", (req, res) => {
   );
 });
   
-
-
-
-
-
-
-
-
-
 app.post("/sendMessage", (req, res) => {
   const { user_id, question } = req.body;
 
@@ -393,7 +372,6 @@ app.post("/sendMessage", (req, res) => {
 );
 });
 
-
 app.post("/rentCar", (req, res) => {
     const {  user_id,car_id, rentData,rentTime, comments, selectedPayment  } = req.body; // Добавлено получение user_id из запроса
     const status = "Открыто";
@@ -413,23 +391,6 @@ app.post("/rentCar", (req, res) => {
     );
 });
 
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
 app.get("/allusers", (req, res) => {
   db.query("SELECT * FROM users", (err, result) => {
     if (err) {
@@ -442,17 +403,6 @@ app.get("/allusers", (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
-
-
-  
-  
   app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}...`);
     db.connect((err) => {

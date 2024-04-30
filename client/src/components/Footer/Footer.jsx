@@ -10,20 +10,10 @@ const quickLinks = [
     display: "О нас",
   },
 
-  // {
-  //   path: "#",
-  //   display: "Privacy Policy",
-  // },
-
   {
     path: "/cars",
     display: "Наши авто",
   },
-
-  // {
-  //   path: "/blogs",
-  //   display: "Blog",
-  // },
 
   {
     path: "/contact",

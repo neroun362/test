@@ -3,7 +3,7 @@ import Axios from "axios";
 import { TableCell, TableRow, Select, MenuItem, Button } from "@mui/material";
 import { toastMessage } from "../utils/toastMessage";
 
-const QuestionUsers = () => {
+const AllUsersQuestion = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedDate, setSelectedDate] = useState(""); // Состояние для выбранной даты
   const formatDate = (dateString) => {
@@ -144,4 +144,4 @@ const QuestionUsers = () => {
   );
 };
 
-export default QuestionUsers;
+export default AllUsersQuestion;

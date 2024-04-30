@@ -24,10 +24,6 @@ const navLinks = [
     display: "Авто",
   },
 
-  // {
-  //   path: "/blogs",
-  //   display: "Blog",
-  // },
   {
     path: "/contact",
     display: "Контакты",
@@ -156,15 +152,6 @@ const Header = ({}) => {
                 ))}
               </div>
             </div>
-
-            {/* <div className="nav__right">
-              <div className="search__box">
-                <input type="text" placeholder="Search" />
-                <span>
-                  <i className="ri-search-line"></i>
-                </span>
-              </div>
-            </div> */}
           </div>
         </Container>
       </div>

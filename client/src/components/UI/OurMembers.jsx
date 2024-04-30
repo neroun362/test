@@ -28,16 +28,6 @@ const OUR__MEMBERS = [
     imgUrl: ava02,
   },
 
-  // {
-  //   name: "Елена Смирнова",
-  //   experience: "5 лет опыта",
-  //   fbUrl: "#",
-  //   instUrl: "#",
-  //   twitUrl: "#",
-  //   linkedinUrl: "#",
-  //   imgUrl: ava03,
-  // },
-
   {
     name: "Дмитрий Петров",
     experience: "5 лет опыта ",
@@ -65,10 +55,6 @@ const OurMembers = () => {
                 <Link to={item.twitUrl}>
                   <i className="ri-twitter-line"></i>
                 </Link>
-                {/* 
-                <Link to={item.linkedinUrl}>
-                  <i class="ri-linkedin-line"></i>
-                </Link> */}
 
                 <Link to={item.instUrl}>
                   <i className="ri-instagram-line"></i>

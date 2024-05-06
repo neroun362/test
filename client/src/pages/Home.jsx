@@ -13,13 +13,12 @@ import CarItem from "../components/UI/CarItem";
 const Home = () => {
   return (
     <Helmet title="Home">
-      {/* ============= hero section =========== */}
       <section className="p-0 hero__slider-section">
         <HeroSlider />
       </section>
-      {/* =========== about section ================ */}
+
       <AboutSection />
-      {/* ========== services section ============ */}
+
       <section>
         <Container>
           <Row>
@@ -31,9 +30,6 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      {/* =========== car offer section ============= */}
-      <section></section>
-      {/* =========== become a driver section ============ */}
     </Helmet>
   );
 };

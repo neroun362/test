@@ -33,8 +33,6 @@ const Authenticated = () => {
         <Route path="/about" element={<About />} />
         <Route path="/cars" element={<CarListing />} />
         <Route path="/cars/:slug" element={<CarDetails />} />
-        {/* <Route path="/blogs" element={<Blog />} />
-        <Route path="/blogs/:slug" element={<BlogDetails />} /> */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/registration" element={<RegistrePage />} />
@@ -48,9 +46,7 @@ const Authenticated = () => {
             <Route path="/allorder" element={<AllHistoryOrder />} />
             <Route path="/allquestion" element={<AllUsersQuestion />} />
             <Route path="/allusers" element={<AllUsers />} />
-            <Route path="/allcars" element={<AllCars />} />
-            
-            
+            <Route path="/allcars" element={<AllCars />} />    
           </>
         )}
 

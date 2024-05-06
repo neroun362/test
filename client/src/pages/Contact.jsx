@@ -27,9 +27,6 @@ const socialLinks = [
 ];
 
 const Contact = () => {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [question, setQuestion] = useState("");
   const authContext = useAuthContext();
   const [userContact, setUserContact] = useState({
     question: "",

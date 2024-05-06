@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -73,6 +73,14 @@ export default function BasicMenu() {
           style={{ textDecoration: "none", color: "inherit" }}
         >
           Пользователи
+        </Link>
+      </MenuItem>,
+      <MenuItem key="viewcars" onClick={handleClose}>
+        <Link
+          to="/allcars"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          Автомобили
         </Link>
       </MenuItem>
     );

@@ -43,6 +43,7 @@ const db = mysql.createConnection({
     );
 });
 
+
 app.post("/login", (req, res) => {
   const phone = req.body.phone;
   const password = req.body.password;
@@ -63,7 +64,7 @@ app.post("/login", (req, res) => {
               };
               res.send(user);
           } else {
-              res.send({message: "Wrong phone/password or user is deleted"}); // Вернуть сообщение об ошибке, если пользователь не найден или удален
+              res.send({message: "Wrong phone/password "}); // Вернуть сообщение об ошибке, если пользователь не найден или удален
           }       
       }
   );
@@ -81,6 +82,43 @@ app.get("/cars", (req, res) => {
     });
   });
 
+  app.put("/updatecar/:id", (req, res) => {
+    const carId = req.params.id;
+    const { price, imgUrl,status } = req.body;
+  
+    db.query(
+      "UPDATE cars SET price = ?, imgUrl = ?,status = ? WHERE car_id = ?",
+      [price, imgUrl,status, carId],
+      (err, result) => {
+        if (err) {
+          console.error("Error updating vehicle data:", err);
+          return res.status(500).send("Internal server error");
+        }
+        console.log("Vehicle data has been successfully updated");
+        return res.status(200).send("Vehicle data has been successfully updated");
+      }
+    );
+  });
+  app.post("/addCar", (req, res) => {
+    const { brand, carName, model, price, power, gps, automatic, description, imgUrl } = req.body;
+  
+    db.query(
+      "INSERT INTO cars (brand, carName, model, price, power, gps, automatic, description, imgUrl, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Временно не работает')",
+      [brand, carName, model, price, power, gps, automatic, description, imgUrl],
+      (err, result) => {
+          if (err) {
+              console.error("Error when adding a car:", err);
+              return res.status(500).send("Error when adding a car:");
+          }
+  
+          console.log("The car was added successfully");
+          return res.status(200).send("The car was added successfully");
+      }
+    );
+  });
+ 
+  
+  
   app.get("/profile", (req, res) => {
     const user_id = req.headers.authorization.split(' ')[1]; // Извлечение user_id из заголовка Authorization
     db.query("SELECT * FROM users WHERE user_id = ?", user_id, (err, result) => {
@@ -144,7 +182,7 @@ app.get("/cars", (req, res) => {
       [selectedDate],
       (err, result) => {
         if (err) {
-          console.error("Ошибка при получении вопросов по дате:", err);
+          console.error("Error when receiving questions by date:", err);
           return res.status(500).send("Internal server error");
         }
         res.send(result); // Отправляем результат запроса клиенту
@@ -193,11 +231,11 @@ app.get("/cars", (req, res) => {
       "SELECT * FROM users WHERE deleteStatus = 'Удален'",
       (err, result) => {
         if (err) {
-          console.error("Ошибка при получении удаленных пользователей:", err);
-          return res.status(500).send("Внутренняя ошибка сервера");
+          console.error("Error receiving deleted users:", err);
+          return res.status(500).send("Internal server error");
         }
   
-        console.log("Удаленные пользователи успешно получены");
+        console.log("Deleted users have been successfully received");
         return res.status(200).json(result);
       }
     );
@@ -211,12 +249,12 @@ app.get("/cars", (req, res) => {
       [userId],
       (err, result) => {
         if (err) {
-          console.error("Ошибка при восстановлении пользователя:", err);
-          return res.status(500).send("Внутренняя ошибка сервера");
+          console.error("Error during user recovery:", err);
+          return res.status(500).send("Internal server error");
         }
   
-        console.log("Пользователь успешно восстановлен");
-        return res.status(200).send("Пользователь успешно восстановлен");
+        console.log("The user has been successfully restored");
+        return res.status(200).send("The user has been successfully restored");
       }
     );
   });
@@ -226,11 +264,11 @@ app.put("/deleteUser", (req, res) => {
 
   db.query("UPDATE users SET deleteStatus = 'Удален' WHERE user_id = ?", [user_id], (err, result) => {
       if (err) {
-          console.error("Ошибка при пометке пользователя как удаленного:", err);
-          return res.status(500).send("Внутренняя ошибка сервера");
+          console.error("Error when marking a user as deleted:", err);
+          return res.status(500).send("Internal server error");
       }
-      console.log("Пользователь успешно помечен как удаленный");
-      return res.status(200).send("Пользователь успешно помечен как удаленный");
+      console.log("The user has been successfully marked as deleted");
+      return res.status(200).send("The user has been successfully marked as deleted");
   });
 });
 
@@ -320,12 +358,12 @@ app.put("/deleteUser", (req, res) => {
         [status, orderId],
         (err, result) => {
             if (err) {
-                console.error("Ошибка при обновлении статуса заказа:", err);
-                return res.status(500).send("Внутренняя ошибка сервера");
+                console.error("Error updating the order status:", err);
+                return res.status(500).send("Internal server error");
             }
 
-            console.log("Статус заказа успешно обновлен");
-            return res.status(200).send("Статус заказа успешно обновлен");
+            console.log("The order status has been successfully updated");
+            return res.status(200).send("The order status has been successfully updated");
         }
     );
 });
@@ -339,12 +377,12 @@ app.put("/messages/:id/status", (req, res) => {
       [status, questionId],
       (err, result) => {
           if (err) {
-              console.error("Ошибка при обновлении статуса вопроса:", err);
-              return res.status(500).send("Внутренняя ошибка сервера");
+              console.error("Error updating the issue status:", err);
+              return res.status(500).send("Internal server error");
           }
 
-          console.log("Статус вопроса успешно обновлен");
-          return res.status(200).send("Статус вопроса успешно обновлен");
+          console.log("The issue status has been successfully updated");
+          return res.status(200).send("The issue status has been successfully updated");
       }
   );
 });
@@ -362,12 +400,12 @@ app.post("/sendMessage", (req, res) => {
     [user_id, question, status, formattedDate],
     (err, result) => {
         if (err) {
-            console.error("Ошибка при сохранении вопроса:", err);
-            return res.status(500).send("Внутренняя ошибка сервера");
+            console.error("Error saving the question:", err);
+            return res.status(500).send("Internal server error");
         }
 
-        console.log("Вопрос пользователя сохранен с установленным статусом и текущей датой");
-        return res.status(200).send("Вопрос пользователя сохранен");
+        console.log("The user's question is saved");
+        return res.status(200).send("The user's question is saved");
     }
 );
 });
@@ -381,12 +419,12 @@ app.post("/rentCar", (req, res) => {
         [user_id,car_id, rentData,rentTime, comments, selectedPayment,status], // Добавлено передачу user_id в параметры запроса
         (err, result) => {
             if (err) {
-                console.error("Ошибка:", err);
-                return res.status(500).send("Внутренняя ошибка сервера");
+                console.error("Error saving the rent:", err);
+                return res.status(500).send("Internal server error");
             }
 
-            console.log("Заявка пользователя принята");
-            return res.status(200).send("Заявка пользователя принята");
+            console.log("The user's request has been accepted");
+            return res.status(200).send("The user's request has been accepted");
         }
     );
 });

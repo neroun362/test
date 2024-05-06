@@ -6,7 +6,7 @@ import CarListing from "../pages/CarListing";
 import CarDetails from "../pages/CarDetails";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
-import LoginPage from "../pages/LoginPage";
+
 import RegistrePage from "../pages/RegistrePage";
 import ProfilePage from "../pages/ProfilePageUser";
 import HistoryOrderUser from "../pages/HistoreOrderUser";
@@ -15,6 +15,8 @@ import AllHistoryOrder from "../pages/AllHistoryOrder";
 import AllUsersQuestion from "../pages/AllUsersQuestion"
 import HistoryQuestionUser from "../pages/HistoreQuestionUser";
 import AllUsers from "../pages/AllUsers";
+import AllCars from "../pages/AllCars";
+
 import { useAuthContext } from "../context/AuthContext";
 
 
@@ -46,7 +48,8 @@ const Authenticated = () => {
             <Route path="/allorder" element={<AllHistoryOrder />} />
             <Route path="/allquestion" element={<AllUsersQuestion />} />
             <Route path="/allusers" element={<AllUsers />} />
-           
+            <Route path="/allcars" element={<AllCars />} />
+            
             
           </>
         )}

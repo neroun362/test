@@ -304,6 +304,7 @@ const AllCars = () => {
                     >
                       <option value="В аренде">В аренде</option>
                       <option value="Свободная">Свободная</option>
+                      <option value="Недоступна">Недоступна</option>
                     </TextField>
                   ) : (
                     car.status

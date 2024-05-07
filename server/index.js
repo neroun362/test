@@ -292,7 +292,7 @@ app.put("/deleteUser", (req, res) => {
   
   app.get("/allquestion", (req, res) => {
     db.query(
-      `SELECT message_id, users.firstName, users.phone, messages.question,messages.messageData, messages.status
+      `SELECT message_id, users.firstName, users.phone, users.email, messages.question,messages.messageData, messages.status
       FROM messages 
       INNER JOIN users ON  users.user_id = messages.user_id;`,
       (err, result) => {

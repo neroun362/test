@@ -110,6 +110,7 @@ const AllUsersQuestion = () => {
             <tr>
               <TableCell>Имя пользователя</TableCell>
               <TableCell>Номер телефона</TableCell>
+              <TableCell>Email</TableCell>
               <TableCell>Вопрос</TableCell>
               <TableCell>Дата</TableCell>
               <TableCell>Статус</TableCell>
@@ -120,6 +121,7 @@ const AllUsersQuestion = () => {
               <TableRow key={question.message_id}>
                 <TableCell>{question.firstName}</TableCell>
                 <TableCell>{question.phone}</TableCell>
+                <TableCell>{question.email}</TableCell>
                 <TableCell>{question.question}</TableCell>
                 <TableCell>{formatDate(question.messageData)}</TableCell>
                 <TableCell>{question.status}</TableCell>

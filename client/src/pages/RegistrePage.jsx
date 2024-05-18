@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
-import { Link, Navigate, Redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import img from "../assets/all-images/drive.jpg";
 import Axios from "axios";
 import { toastMessage } from "../utils/toastMessage";
 import { useAuthContext } from "../context/AuthContext";
+
 const RegisterPage = ({ onLogin, onRegister }) => {
   const [firstNameUserReg, setFirstNameUserReg] = useState("");
   const [lastNameUserReg, setLastNameUserReg] = useState("");
   const [phoneUserReg, setPhoneUserReg] = useState("");
   const [emailUserReg, setEmailUserReg] = useState("");
   const [passwordUserReg, setPasswordUserReg] = useState("");
-  const [redirectToLogin, setRedirectToLogin] = useState(false);
   const authContext = useAuthContext();
   const navigate = useNavigate();
 
@@ -24,10 +24,26 @@ const RegisterPage = ({ onLogin, onRegister }) => {
       !emailUserReg ||
       !passwordUserReg
     ) {
-      // Проверка на пустые значения
       toastMessage("Пожалуйста, заполните все поля формы.");
       return;
     }
+
+    // Проверка наличия @
+    if (!emailUserReg.includes("@")) {
+      toastMessage(
+        "Адрес электронной почты должен содержать символ «@».",
+        "error"
+      );
+      return;
+    }
+
+    // Проверка корректности email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailUserReg)) {
+      toastMessage("Некорректный email.", "error");
+      return;
+    }
+
     Axios.post("http://localhost:3307/registration", {
       firstName: firstNameUserReg,
       lastName: lastNameUserReg,
@@ -39,8 +55,9 @@ const RegisterPage = ({ onLogin, onRegister }) => {
       console.log(response);
       authContext.authUserChangeHandler(user);
     });
+
     navigate("/home");
-    toastMessage("Добро  пожаловать к нам! Спасибо что выбрали Нас!");
+    toastMessage("Добро пожаловать к нам! Спасибо что выбрали Нас!");
   };
 
   return (
@@ -127,7 +144,7 @@ const RegisterPage = ({ onLogin, onRegister }) => {
 
               <Button
                 onClick={register}
-                type="submit"
+                type="button"
                 variant="contained"
                 fullWidth
                 sx={{ mt: 2 }}
